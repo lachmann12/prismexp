@@ -24,7 +24,7 @@ def filter_genes(h5file: str, readThreshold: int=20, sampleThreshold: float=0.02
     if deterministic:
         random.seed(42)
 
-    exp = a4.data.rand(h5file, filterSamples, filterSingle=True)
+    exp = a4.data.rand(h5file, filterSamples, remove_sc=True)
     kk = exp[exp > readThreshold].count(axis=1)
     return([idx for idx, val in enumerate(kk) if val >= exp.shape[1]*sampleThreshold])
 
